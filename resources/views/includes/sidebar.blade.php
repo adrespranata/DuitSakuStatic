@@ -24,21 +24,21 @@
     </div>
 
     <!-- Nav Item - Utilities Collapse Menu -->
-    {{-- <li class="nav-item {{ request()->is('items*') || request()->is('itemCategory*') ? 'active' : '' }}">
+    <li class="nav-item {{ request()->is('IncomeCategory*') || request()->is('Incomes*') ? 'active' : '' }}">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne"
             aria-expanded="true" aria-controls="collapseOne">
-            <i class="fa-solid fa-box"></i>
-            <span>Items</span>
+            <i class="fa-solid fa-wallet"></i>
+            <span>Incomes</span>
         </a>
         <div id="collapseOne" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item {{ request()->is('items*') ? 'active' : '' }}"
-                    href="{{ route('items') }}">Item</a>
-                <a class="collapse-item {{ request()->is('itemCategory*') ? 'active' : '' }}"
-                    href="{{ route('itemCategory') }}">Category</a>
+                <a class="collapse-item {{ request()->is('IncomeCategory*') ? 'active' : '' }}"
+                    href="{{ route('IncomeCategory') }}">Income Category</a>
+                <a class="collapse-item {{ request()->is('Incomes*') ? 'active' : '' }}"
+                    href="{{ route('Incomes') }}">Incomes</a>
             </div>
         </div>
-    </li> --}}
+    </li>
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 

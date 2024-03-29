@@ -14,9 +14,8 @@ class AuthController extends Controller
             return redirect()->route('dashboard');
         }
 
-        $title = 'Activity Based Costing';
-        $subTitle = 'Login';
-        return view('auth.login', compact('title', 'subTitle'));
+        $title = 'Duit Saku';
+        return view('auth.login', compact('title'));
     }
 
     public function auth(Request $request)

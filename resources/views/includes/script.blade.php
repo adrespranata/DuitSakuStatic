@@ -26,6 +26,6 @@
     integrity="sha512-lbwH47l/tPXJYG9AcFNoJaTMhGvYWhVM9YI43CT+uteTRRaiLCui8snIgyAN8XWgNjNhCqlAUdzZptso6OCoFQ=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-{{-- @vite(['resources/js/app.js']) --}}
+@vite(['resources/js/app.js'])
 
 @stack('post_scripts')

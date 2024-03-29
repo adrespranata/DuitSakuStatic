@@ -50,7 +50,7 @@ class ExpenseCategoryController extends Controller
             ExpenseCategory::create($request->all());
             return redirect()->route('ExpenseCategory')->with('success', 'Expense category created successfully');
         } catch (\Illuminate\Database\QueryException $e) {
-            return redirect()->back()->with('error', 'Failed to create activity: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Failed to create expense: ' . $e->getMessage());
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
         }
@@ -94,7 +94,7 @@ class ExpenseCategoryController extends Controller
             $expenseCategory->update($request->all());
             return redirect()->route('ExpenseCategory')->with('success', 'Expense category updated successfully');
         } catch (\Illuminate\Database\QueryException $e) {
-            return redirect()->back()->with('error', 'Failed to create activity: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Failed to create expense: ' . $e->getMessage());
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
         }

@@ -28,6 +28,8 @@ class DashboardController extends Controller
         $totalAmountByCategoryExpenses = Expenses::select('category_id', DB::raw('SUM(amount) as total_amount'))
             ->groupBy('category_id')
             ->get();
+        // Sisa Tabungan
+        $balance = $incomes - $expenses;
 
         return view('pages.dashboard', compact(
             'title',
@@ -35,7 +37,8 @@ class DashboardController extends Controller
             'incomes',
             'totalAmountByCategory',
             'expenses',
-            'totalAmountByCategoryExpenses'
+            'totalAmountByCategoryExpenses',
+            'balance'
         ));
     }
 

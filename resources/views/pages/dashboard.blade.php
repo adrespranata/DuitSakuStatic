@@ -17,7 +17,7 @@
                         class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
             </div>
 
-            <!-- Content Row -->
+            <!-- Content Row - Incomes -->
             <div class="row">
                 <div class="col-xl-3 col-md-6 mb-4">
                     <div class="card border-left-primary shadow h-100 py-2">
@@ -65,7 +65,11 @@
                         </div>
                     </div>
                 @endforeach
+            </div>
+            <!-- Content Row - Incomes -->
 
+            <!-- Content Row - Expenses -->
+            <div class="row">
                 <div class="col-xl-3 col-md-6 mb-4">
                     <div class="card border-left-primary shadow h-100 py-2">
                         <div class="card-body">
@@ -77,7 +81,7 @@
                                         {{ number_format($expenses, 0, ',', '.') }}</div>
                                 </div>
                                 <div class="col-auto">
-                                    <i class="fa-solid fa-wallet fa-2x text-gray-300"></i>
+                                    <i class="fa-solid fa-money-bills fa-2x text-gray-300"></i>
                                 </div>
                             </div>
                         </div>
@@ -105,16 +109,37 @@
                                             {{ number_format($total->total_amount, 0, ',', '.') }}</div>
                                     </div>
                                     <div class="col-auto">
-                                        <i class="fa-solid fa-wallet fa-2x text-gray-300"></i>
+                                        <i class="fa-solid fa-money-bills fa-2x text-gray-300"></i>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 @endforeach
-
             </div>
-            <!-- Content Row -->
+            <!-- Content Row - Expenses -->
+
+            <!-- Content Row - Balance -->
+            <div class="row">
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <div class="card border-left-primary shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                        Balance (Total)</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">Rp.
+                                        {{ number_format($balance, 0, ',', '.') }}</div>
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fa-solid fa-money-check fa-2x text-gray-300"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Content Row - Balance -->
 
             <!-- Content Row - Incomes -->
             <div class="row">

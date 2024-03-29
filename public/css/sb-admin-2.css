@@ -10341,7 +10341,7 @@ a:focus {
 
 /* Backgroudn Custom Image */
 .bg-customs {
-    background-image: url("../img/peak_background.png");
+    background-image: url("../img/uploaded/background/peak_background.png");
     background-repeat: no-repeat;
     background-size: cover;
 }

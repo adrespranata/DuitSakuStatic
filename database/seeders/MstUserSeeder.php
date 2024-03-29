@@ -27,6 +27,7 @@ class MstUserSeeder extends Seeder
             'first_name' => 'Adres',
             'middle_name' => '',
             'last_name' => 'Pranata',
+            'picture' => 'profile.jpg',
             'address' => 'Jl. 2 jalur simpang, RW.4, Talang Saling, Kec. Seluma, Kabupaten Seluma, Bengkulu 38876, Indonesia',
             'city' => 'Bengkulu',
             'country' => 'Indonesia',

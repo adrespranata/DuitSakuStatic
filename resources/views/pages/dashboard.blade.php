@@ -39,6 +39,35 @@
                     </div>
                 </div>
 
+                @foreach ($totalAmountByCategory as $index => $total)
+                    @php
+                        $borderColors = [
+                            'border-left-success',
+                            'border-left-info',
+                            'border-left-warning',
+                            'border-left-secondary',
+                        ];
+                        $dynamicBorder = $borderColors[$index % count($borderColors)];
+                    @endphp
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card {{ $dynamicBorder }} shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                            {{ $total->category->name }} (Total)</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">Rp.
+                                            {{ number_format($total->total_amount, 0, ',', '.') }}</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fa-solid fa-wallet fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+
             </div>
 
             <!-- Content Row -->
@@ -93,5 +122,17 @@
         <!-- Page level custom scripts -->
         <script src="{{ asset('js/chart/chart-area-incomes.js') }}"></script>
         <script src="{{ asset('js/chart/chart-pie-incomes.js') }}"></script>
+        <script>
+            // Daftar kelas warna border yang ingin digunakan
+            var borderClasses = ['border-left-primary', 'border-left-secondary', 'border-left-success', 'border-left-danger',
+                'border-left-warning', 'border-left-info', 'border-left-light', 'border-left-dark'
+            ];
+
+            // Pilih secara acak satu kelas dari array borderClasses
+            var randomBorderClass = borderClasses[Math.floor(Math.random() * borderClasses.length)];
+
+            // Terapkan kelas yang dipilih ke elemen dengan ID dynamicBorder
+            document.getElementById('dynamicBorder').classList.add(randomBorderClass);
+        </script>
     @endpush
 @endsection

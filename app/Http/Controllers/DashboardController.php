@@ -18,11 +18,15 @@ class DashboardController extends Controller
 
         // Ambil total pendapatan dari semua entri pendapatan
         $incomes = Incomes::sum('amount');
+        $totalAmountByCategory = Incomes::select('category_id', DB::raw('SUM(amount) as total_amount'))
+            ->groupBy('category_id')
+            ->get();
 
         return view('pages.dashboard', compact(
             'title',
             'userDetails',
-            'incomes'
+            'incomes',
+            'totalAmountByCategory'
         ));
     }
 

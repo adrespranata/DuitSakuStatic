@@ -9,12 +9,12 @@
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
-            <form method="POST" action="{{ route('IncomeCategory.update', $incomeCategory->id) }}">
+            <form method="POST" action="{{ route('ExpenseCategory.update', $expenseCategory->id) }}">
                 @csrf
                 @method('PUT')
                 <div class="card shadow mb-4">
                     <div class="card-header">
-                        {{ __('Edit Income Category') }}
+                        {{ __('Edit Expense Category') }}
                     </div>
 
                     <div class="card-body">
@@ -22,7 +22,7 @@
                             <label for="name">Category Name</label>
                             <input type="text" name="name" id="name"
                                 class="form-control @error('name') is-invalid @enderror"
-                                value="{{ $incomeCategory->name }}">
+                                value="{{ $expenseCategory->name }}">
                             @error('name')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -31,7 +31,7 @@
                         <div class="form-group">
                             <label for="description">Description</label>
                             <textarea name="description" id="description" class="form-control @error('description') is-invalid @enderror"
-                                rows="3">{{ $incomeCategory->description }}</textarea>
+                                rows="3">{{ $expenseCategory->description }}</textarea>
                             @error('description')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -39,7 +39,7 @@
                     </div>
 
                     <div class="card-footer d-flex justify-content-end">
-                        <a href="{{ route('IncomeCategory') }}" class="btn btn-sm btn-secondary">
+                        <a href="{{ route('ExpenseCategory') }}" class="btn btn-sm btn-secondary">
                             Close
                         </a>
                         <button type="submit" class="btn btn-sm btn-primary ml-2">

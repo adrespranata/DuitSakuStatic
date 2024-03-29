@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ExpenseCategoryController;
+use App\Http\Controllers\ExpensesController;
 use App\Http\Controllers\IncomeCategoryController;
 use App\Http\Controllers\IncomesController;
 use Illuminate\Support\Facades\Route;
@@ -17,6 +19,9 @@ Route::group(['middleware' => 'auth', 'log'], function () {
     Route::get('/getIncomesPerMonth', [DashboardController::class, 'getIncomesPerMonth']);
     Route::get('/getIncomeByCategory', [DashboardController::class, 'getIncomeByCategory']);
     Route::get('/getCategoryName/{categoryId}', [DashboardController::class, 'getCategoryName']);
+    Route::get('/getExpensesPerMonth', [DashboardController::class, 'getExpensesPerMonth']);
+    Route::get('/getExpenseByCategory', [DashboardController::class, 'getExpenseByCategory']);
+    Route::get('/getCategoryNameExpenses/{categoryId}', [DashboardController::class, 'getCategoryNameExpenses']);
 
 
     // Incomes Category
@@ -36,6 +41,25 @@ Route::group(['middleware' => 'auth', 'log'], function () {
         Route::get('/edit/{incomes}', [IncomesController::class, 'edit'])->name('Incomes.edit');
         Route::put('/update/{incomes}', [IncomesController::class, 'update'])->name('Incomes.update');
         Route::delete('/destroy/{incomes}', [IncomesController::class, 'destroy'])->name('Incomes.destroy');
+    });
+
+    // Expense Category
+    Route::group(['prefix' => 'ExpenseCategory'], function () {
+        Route::get('/', [ExpenseCategoryController::class, 'index'])->name('ExpenseCategory');
+        Route::get('/create', [ExpenseCategoryController::class, 'create'])->name('ExpenseCategory.create');
+        Route::post('/store', [ExpenseCategoryController::class, 'store'])->name('ExpenseCategory.store');
+        Route::get('/edit/{expenseCategory}', [ExpenseCategoryController::class, 'edit'])->name('ExpenseCategory.edit');
+        Route::put('/update/{expenseCategory}', [ExpenseCategoryController::class, 'update'])->name('ExpenseCategory.update');
+        Route::delete('/destroy/{expenseCategory}', [ExpenseCategoryController::class, 'destroy'])->name('ExpenseCategory.destroy');
+    });
+    // Expenses
+    Route::group(['prefix' => 'Expenses'], function () {
+        Route::get('/', [ExpensesController::class, 'index'])->name('Expenses');
+        Route::get('/create', [ExpensesController::class, 'create'])->name('Expenses.create');
+        Route::post('/store', [ExpensesController::class, 'store'])->name('Expenses.store');
+        Route::get('/edit/{expenses}', [ExpensesController::class, 'edit'])->name('Expenses.edit');
+        Route::put('/update/{expenses}', [ExpensesController::class, 'update'])->name('Expenses.update');
+        Route::delete('/destroy/{expenses}', [ExpensesController::class, 'destroy'])->name('Expenses.destroy');
     });
 
     // Logout

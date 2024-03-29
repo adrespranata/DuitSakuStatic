@@ -39,6 +39,22 @@
             </div>
         </div>
     </li>
+
+    <li class="nav-item {{ request()->is('ExpenseCategory*') || request()->is('Expenses*') ? 'active' : '' }}">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+            aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fa-solid fa-money-bills"></i>
+            <span>Expenses</span>
+        </a>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item {{ request()->is('ExpenseCategory*') ? 'active' : '' }}"
+                    href="{{ route('ExpenseCategory') }}">Expense Category</a>
+                <a class="collapse-item {{ request()->is('Expenses*') ? 'active' : '' }}"
+                    href="{{ route('Expenses') }}">Expenses</a>
+            </div>
+        </div>
+    </li>
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 

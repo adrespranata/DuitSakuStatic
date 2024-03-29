@@ -9,12 +9,11 @@
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
-            <form method="POST" action="{{ route('Incomes.update', $incomes->id) }}">
+            <form method="POST" action="{{ route('Expenses.store') }}">
                 @csrf
-                @method('PUT')
                 <div class="card shadow mb-4">
                     <div class="card-header">
-                        {{ __('Edit Incomes') }}
+                        {{ __('Create Expenses') }}
                     </div>
 
                     <div class="card-body">
@@ -23,13 +22,11 @@
                                 <div class="form-group">
                                     <label for="category_id">Category</label>
                                     <select name="category_id" id="category_id" class="form-control">
-                                        @foreach ($incomeCategory as $IC)
-                                            <option value="{{ $IC->id }}"
-                                                {{ $IC->id == $incomes->category_id ? 'selected' : '' }}>
-                                                {{ $IC->name }}</option>
+                                        <option value="">Select Category</option>
+                                        @foreach ($expenseCategory as $EC)
+                                            <option value="{{ $EC->id }}">{{ $EC->name }}</option>
                                         @endforeach
                                     </select>
-
                                     @error('category_id')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -40,7 +37,7 @@
                                     <label for="date">Date</label>
                                     <input type="date" name="date" id="date"
                                         class="form-control @error('date') is-invalid @enderror"
-                                        value="{{ $incomes->date }}">
+                                        value="{{ old('date') }}">
                                     @error('date')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -51,7 +48,7 @@
                                     <label for="amount">Amount</label>
                                     <input type="text" name="amount" id="amount"
                                         class="form-control @error('amount') is-invalid @enderror"
-                                        value="{{ number_format($incomes->amount, 0, ',', '.') }}">
+                                        value="{{ old('amount') }}">
                                     @error('amount')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -61,16 +58,15 @@
                         <div class="form-group">
                             <label for="description">Description</label>
                             <textarea name="description" id="description" class="form-control @error('description') is-invalid @enderror"
-                                rows="3">{{ $incomes->description }}</textarea>
+                                rows="3" placeholder="Description">{{ old('description') }}</textarea>
                             @error('description')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>
 
-
                     <div class="card-footer d-flex justify-content-end">
-                        <a href="{{ route('Incomes') }}" class="btn btn-sm btn-secondary">
+                        <a href="{{ route('Expenses') }}" class="btn btn-sm btn-secondary">
                             Close
                         </a>
                         <button type="submit" class="btn btn-sm btn-primary ml-2">
@@ -79,9 +75,9 @@
                     </div>
                 </div>
             </form>
-
         </div>
         <!-- /.container-fluid -->
 
     </div>
+    <!-- End of Main Content -->
 @endsection

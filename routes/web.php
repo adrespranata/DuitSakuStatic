@@ -14,6 +14,10 @@ Route::group(['middleware' => 'guest'], function () {
 Route::group(['middleware' => 'auth', 'log'], function () {
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/getIncomesPerMonth', [DashboardController::class, 'getIncomesPerMonth']);
+    Route::get('/getIncomeByCategory', [DashboardController::class, 'getIncomeByCategory']);
+    Route::get('/getCategoryName/{categoryId}', [DashboardController::class, 'getCategoryName']);
+
 
     // Incomes Category
     Route::group(['prefix' => 'IncomeCategory'], function () {

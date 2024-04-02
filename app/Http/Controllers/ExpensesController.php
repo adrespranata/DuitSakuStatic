@@ -17,7 +17,9 @@ class ExpensesController extends Controller
         $title = 'Duit Saku';
         $user = Auth::user();
         $userDetails = $user->userDetails;
-        $expenses = Expenses::with('category')->get();
+        $expenses = Expenses::with('category')
+        ->orderBy('date', 'desc') 
+        ->get();;
         return view('pages.expenses.index', compact('title', 'userDetails', 'expenses'));
     }
 

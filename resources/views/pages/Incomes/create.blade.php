@@ -48,7 +48,7 @@
                                     <label for="amount">Amount</label>
                                     <input type="text" name="amount" id="amount"
                                         class="form-control @error('amount') is-invalid @enderror"
-                                        value="{{ old('amount') }}">
+                                        value="{{ number_format(old('amount'), 0, ',', '.') }}">
                                     @error('amount')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror

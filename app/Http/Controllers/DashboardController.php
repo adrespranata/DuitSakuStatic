@@ -45,9 +45,14 @@ class DashboardController extends Controller
     public function getIncomesPerMonth()
     {
         // Query untuk mengambil total pendapatan per bulan
-        $incomesPerMonth = Incomes::select(DB::raw('YEAR(date) as year, DATE_FORMAT(date, "%M") as month'), DB::raw('SUM(amount) as total'))
-            ->groupBy('year', 'month')
-            ->get();
+        $incomesPerMonth = Incomes::select(
+            DB::raw('YEAR(date) as year'), 
+            DB::raw('MONTH(date) as month'),  
+            DB::raw('MONTHNAME(date) as months'),  
+            DB::raw('SUM(amount) as total')
+        )
+        ->groupBy('year', 'month', 'months')
+        ->get();
 
         return response()->json($incomesPerMonth);
     }
@@ -76,11 +81,17 @@ class DashboardController extends Controller
     public function getExpensesPerMonth()
     {
         // Query untuk mengambil total pendapatan per bulan
-        $incomesPerMonth = Expenses::select(DB::raw('YEAR(date) as year, DATE_FORMAT(date, "%M") as month'), DB::raw('SUM(amount) as total'))
-            ->groupBy('year', 'month')
-            ->get();
+        $expensesPerMonth = Expenses::select(
+            DB::raw('YEAR(date) as year'), 
+            DB::raw('MONTH(date) as month'),  
+            DB::raw('MONTHNAME(date) as months'),  
+            DB::raw('SUM(amount) as total')
+        )
+        ->groupBy('year', 'month', 'months')
+        ->get();
+        
 
-        return response()->json($incomesPerMonth);
+        return response()->json($expensesPerMonth);
     }
 
     public function getExpenseByCategory()

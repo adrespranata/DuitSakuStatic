@@ -32,14 +32,14 @@ fetch('/getExpensesPerMonth')
     .then(response => response.json())
     .then(data => {
         // Tangani respons dari backend
-        var months = data.map(item => item.month);
+        var labels = data.map(item => `${item.months} ${item.year}`);
         var expensesData = data.map(item => item.total);
 
         var ctx = document.getElementById("expenseAreaCharts");
         var expenseAreaCharts = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: months,
+                labels: labels,
                 datasets: [{
                     label: "Expanses",
                     lineTension: 0.3,

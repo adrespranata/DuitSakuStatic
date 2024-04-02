@@ -18,7 +18,9 @@ class IncomesController extends Controller
         $title = 'Duit Saku';
         $user = Auth::user();
         $userDetails = $user->userDetails;
-        $incomes = Incomes::with('category')->get();
+        $incomes = Incomes::with('category')
+        ->orderBy('date', 'desc') 
+        ->get();
         return view('pages.incomes.index', compact('title', 'userDetails', 'incomes'));
     }
 
@@ -39,6 +41,8 @@ class IncomesController extends Controller
      */
     public function store(Request $request)
     {
+        $request->merge(['amount' => str_replace('.', '', $request->amount)]);
+        
         $request->validate([
             'category_id' => 'required|exists:income_categories,id',
             'date' => 'required|date',
@@ -89,6 +93,8 @@ class IncomesController extends Controller
      */
     public function update(Request $request, Incomes $incomes)
     {
+        $request->merge(['amount' => str_replace('.', '', $request->amount)]);
+
         $request->validate([
             'category_id' => 'required|exists:income_categories,id',
             'date' => 'required|date',
@@ -103,7 +109,6 @@ class IncomesController extends Controller
         ]);
 
         try {
-            $request->merge(['amount' => str_replace('.', '', $request->amount)]);
             $incomes->update($request->all());
             return redirect()->route('Incomes')->with('success', 'Incomes updated successfully');
         } catch (\Illuminate\Database\QueryException $e) {

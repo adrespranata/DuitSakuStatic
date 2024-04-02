@@ -40,7 +40,7 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $income->category->name }}</td>
-                                        <td>{{ $income->date }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($income->date)->translatedFormat('l, j F Y') }}</td>
                                         <td>{{ 'Rp. ' . number_format($income->amount, 0, ',', '.') }}</td>
                                         <td>{{ $income->description }}</td>
                                         <td>

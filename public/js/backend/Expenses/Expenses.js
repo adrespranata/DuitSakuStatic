@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $('.deleteExpanses').click(function (e) {
+    $('.deleteExpenses').click(function (e) {
         e.preventDefault();
 
         var id = $(this).data('id');
@@ -17,7 +17,7 @@ $(document).ready(function () {
             if (result.isConfirmed) {
                 $.ajax({
                     type: 'DELETE',
-                    url: $('#deleteExpanses').data('url').replace(':id', id),
+                    url: $('#deleteExpenses').data('url').replace(':id', id),
                     data: {
                         "_token": CSRF_TOKEN
                     },

@@ -55,6 +55,12 @@
             </div>
         </div>
     </li>
+    <li class="nav-item {{ request()->routeIs('Reports*') ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('Reports') }}">
+            <i class="fa-solid fa-file-invoice"></i>
+            <span>Reports</span></a>
+    </li>
+
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 

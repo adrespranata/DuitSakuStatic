@@ -6,6 +6,7 @@ use App\Http\Controllers\ExpenseCategoryController;
 use App\Http\Controllers\ExpensesController;
 use App\Http\Controllers\IncomeCategoryController;
 use App\Http\Controllers\IncomesController;
+use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -61,6 +62,10 @@ Route::group(['middleware' => 'auth', 'log'], function () {
         Route::put('/update/{expenses}', [ExpensesController::class, 'update'])->name('Expenses.update');
         Route::delete('/destroy/{expenses}', [ExpensesController::class, 'destroy'])->name('Expenses.destroy');
     });
+
+    // Reports
+    Route::get('/Reports', [ReportController::class, 'index'])->name('Reports');
+    Route::post('/Reports/store', [ReportController::class, 'store'])->name('Reports.store');
 
     // Logout
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

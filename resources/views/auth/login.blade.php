@@ -36,25 +36,29 @@
                                 <div class="p-5">
                                     <form class="user" method="POST" action="{{ route('auth') }}">
                                         @csrf
+
+                                        @if (session('error'))
+                                            <div class="alert alert-danger">
+                                                {{ session('error') }}
+                                            </div>
+                                        @endif
+
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
+                                            <input type="email"
+                                                class="form-control form-control-user @error('email') is-invalid @enderror"
                                                 aria-describedby="emailHelp" placeholder="Enter Email Address..."
                                                 name="email" aria-label="Email"
                                                 value="{{ old('email', env('EMAIL_DEFAULT')) }}">
                                             @error('email')
-                                                <span role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
+                                                <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
                                         <div class="form-group">
                                             <input type="password" name="password"
-                                                class="form-control form-control-user" placeholder="Password"
-                                                value="{{ env('PASSWORD_DEFAULT') }}">
+                                                class="form-control form-control-user @error('password') is-invalid @enderror"
+                                                placeholder="Password" value="{{ env('PASSWORD_DEFAULT') }}">
                                             @error('password')
-                                                <span role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
+                                                <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
                                         <div class="form-group">

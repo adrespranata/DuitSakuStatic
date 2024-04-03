@@ -21,32 +21,34 @@ class AuthController extends Controller
     public function auth(Request $request)
     {
         // Validasi data yang dikirimkan
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'email' => 'required|email',
             'password' => 'required',
+        ], [
+            'email.required' => 'The email field is required.',
+            'email.email' => 'Please enter a valid email address.',
+            'password.required' => 'The password field is required.',
         ]);
-
-        if ($validator->fails()) {
-            return redirect()->route('login')->withErrors($validator)->withInput();
-        }
-
+    
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            return redirect()->route('dashboard');
+            $request->session()->regenerate();
+            return redirect()->route('dashboard')->with('success', 'Login successfully');
+        } else {
+            return redirect()->back()->with('error', 'Invalid email or password')->withInput();
         }
-
-        return redirect()->route('login')->withErrors([
-            'failed' => 'Email atau password yang Anda masukkan salah.'
-        ])->withInput();
     }
+    
 
-    public function logout()
+    public function logout(Request $request)
     {
         if (Auth::check()) {
             Auth::logout();
+            $request->session()->invalidate();
             return redirect()->route('login')->with('success', 'Logout successful');
         } else {
             return redirect()->route('login')->with('error', 'You are not logged in.');
         }
     }
+
 }

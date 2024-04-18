@@ -11,18 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('expenses', function (Blueprint $table) {
+        Schema::create('payment_types', function (Blueprint $table) {
             $table->id();
-            // $table->unsignedBigInteger('category_id');
             $table->foreignId('category_id')->constrained('expense_categories')->onDelete('cascade');
-            $table->foreignId('payment_type_id')->constrained('payment_types')->onDelete('cascade');
-            $table->date('date');
-            $table->decimal('amount', 10, 2);
+            $table->string('name');
             $table->text('description')->nullable();
             $table->timestamps();
-
-            // Definisikan kunci asing untuk user_id
-            // $table->foreign('category_id')->references('id')->on('expense_categories')->onDelete('cascade');
         });
     }
 
@@ -31,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('expenses');
+        Schema::dropIfExists('payment_types');
     }
 };

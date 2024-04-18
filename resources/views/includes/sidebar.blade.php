@@ -55,10 +55,17 @@
             </div>
         </div>
     </li>
+    <li class="nav-item {{ request()->routeIs('PaymentType*') ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('PaymentType') }}">
+            <i class="fa-solid fa-money-check"></i>
+            <span>Payment Types</span>
+        </a>
+    </li>
     <li class="nav-item {{ request()->routeIs('Reports*') ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('Reports') }}">
             <i class="fa-solid fa-file-invoice"></i>
-            <span>Reports</span></a>
+            <span>Reports</span>
+        </a>
     </li>
 
     <!-- Divider -->

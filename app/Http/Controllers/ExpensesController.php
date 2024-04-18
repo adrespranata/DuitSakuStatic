@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ExpenseCategory;
 use App\Models\Expenses;
+use App\Models\PaymentType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,9 +18,10 @@ class ExpensesController extends Controller
         $title = 'Duit Saku';
         $user = Auth::user();
         $userDetails = $user->userDetails;
-        $expenses = Expenses::with('category')
-        ->orderBy('date', 'desc') 
-        ->get();;
+        $expenses = Expenses::with('category', 'paymentType')
+            ->orderBy('date', 'desc')
+            ->get();
+
         return view('pages.expenses.index', compact('title', 'userDetails', 'expenses'));
     }
 
@@ -42,18 +44,21 @@ class ExpensesController extends Controller
     {
         $request->validate([
             'category_id' => 'required|exists:expense_categories,id',
+            // 'payment_type_id ' => 'required|exists:payment_types,id',
             'date' => 'required|date',
             'amount' => 'required|numeric|min:0',
             'description' => 'nullable|string',
         ], [
             'category_id.required' => 'The expense category field is required.',
+            // 'payment_type_id.required' => 'The payment type field is required.',
+            // 'payment_type_id.exists' => 'The selected payment type is invalid.',
             'date.required' => 'The date field is required.',
             'date.date' => 'The date must be a valid date.',
             'amount.required' => 'The amount field is required.',
             'amount.numeric' => 'The amount must be a number.',
             'amount.min' => 'The amount must be at least 0.',
         ]);
-
+        // dd($request->all());
         try {
             Expenses::create($request->all());
             return redirect()->route('Expenses')->with('success', 'Expenses created successfully');
@@ -81,8 +86,9 @@ class ExpensesController extends Controller
         $user = Auth::user();
         $userDetails = $user->userDetails;
         $expenseCategory = ExpenseCategory::all();
-        $expenses = Expenses::with('category')->findOrFail($expenses->id);
-        return view('pages.expenses.edit', compact('title', 'userDetails', 'expenseCategory', 'expenses'));
+        $paymentType = PaymentType::all();
+        $expenses = Expenses::with('category', 'paymentType')->findOrFail($expenses->id);
+        return view('pages.expenses.edit', compact('title', 'userDetails', 'expenseCategory', 'paymentType', 'expenses'));
     }
 
     /**
@@ -92,11 +98,13 @@ class ExpensesController extends Controller
     {
         $request->validate([
             'category_id' => 'required|exists:expense_categories,id',
+            // 'payment_type_id ' => 'required|exists:payment_types,id',
             'date' => 'required|date',
             'amount' => 'required|numeric',
             'description' => 'nullable|string',
         ], [
             'category_id.required' => 'The expense category field is required.',
+            // 'payment_type_id.required' => 'The payment type field is required.',
             'date.required' => 'The date field is required.',
             'date.date' => 'The date must be a valid date.',
             'amount.required' => 'The amount field is required.',

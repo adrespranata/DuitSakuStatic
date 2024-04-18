@@ -6,6 +6,9 @@ use App\Http\Controllers\ExpenseCategoryController;
 use App\Http\Controllers\ExpensesController;
 use App\Http\Controllers\IncomeCategoryController;
 use App\Http\Controllers\IncomesController;
+use App\Http\Controllers\PaymentTypeController;
+use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Route;
 
@@ -63,10 +66,26 @@ Route::group(['middleware' => 'auth', 'log'], function () {
         Route::delete('/destroy/{expenses}', [ExpensesController::class, 'destroy'])->name('Expenses.destroy');
     });
 
+    // Payment Types
+    Route::group(['prefix' => 'PaymentType'], function () {
+        Route::get('/', [PaymentTypeController::class, 'index'])->name('PaymentType');
+        Route::get('/create', [PaymentTypeController::class, 'create'])->name('PaymentType.create');
+        Route::post('/store', [PaymentTypeController::class, 'store'])->name('PaymentType.store');
+        Route::get('/edit/{paymentType}', [PaymentTypeController::class, 'edit'])->name('PaymentType.edit');
+        Route::put('/update/{paymentType}', [PaymentTypeController::class, 'update'])->name('PaymentType.update');
+        Route::delete('/destroy/{paymentType}', [PaymentTypeController::class, 'destroy'])->name('PaymentType.destroy');
+        Route::get('/getPaymentTypes', [PaymentTypeController::class, 'getPaymentTypes'])->name('getPaymentTypes');
+    });
     // Reports
     Route::get('/Reports', [ReportController::class, 'index'])->name('Reports');
     Route::post('/Reports/store', [ReportController::class, 'store'])->name('Reports.store');
 
+    Route::group(['prefix' => 'Profiles'], function () {
+        Route::get('/', [ProfileController::class, 'index'])->name('Profiles');
+        Route::post('/updatePassword', [ProfileController::class, 'updatePassword'])->name('updatePassword');
+        Route::post('/updateDetails', [ProfileController::class, 'updateDetails'])->name('updateDetails');
+        Route::post('/updatePicture', [ProfileController::class, 'updatePicture'])->name('updatePicture');
+    });
     // Logout
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });

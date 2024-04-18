@@ -13,14 +13,14 @@
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3 d-flex justify-content-between align-items-center">
-                    <h6 class="m-0 font-weight-bold text-primary">Expenses List</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Payment Type List</h6>
                     <div>
-                        <a href="{{ route('Expenses.create') }}" class="btn btn-sm btn-primary">
+                        <a href="{{ route('PaymentType.create') }}" class="btn btn-sm btn-primary">
                             {{ __('Create New') }}
                         </a>
                     </div>
                 </div>
-                <div id="deleteExpenses" data-url="{{ route('Expenses.destroy', ':id') }}"></div>
+                <div id="deletePayType" data-url="{{ route('PaymentType.destroy', ':id') }}"></div>
 
                 <div class="card-body">
                     <div class="table-responsive">
@@ -28,32 +28,28 @@
                             <thead>
                                 <tr>
                                     <th>{{ __('No') }}</th>
-                                    <th>{{ __('Category Name') }}</th>
-                                    <th>{{ __('Payment Type') }}</th>
-                                    <th>{{ __('Date') }}</th>
-                                    <th>{{ __('Amount') }}</th>
+                                    <th>{{ __('Name') }}</th>
+                                    <th>{{ __('Expense Category') }}</th>
                                     <th>{{ __('Description') }}</th>
                                     <th>{{ __('Actions') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($expenses as $expense)
+                                @foreach ($paymentTypes as $payType)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $expense->category->name }}</td>
-                                        <td>{{ $expense->paymentType ? $expense->paymentType->name : '-' }}</td>
-                                        <td>{{ \Carbon\Carbon::parse($expense->date)->translatedFormat('l, j F Y') }}</td>
-                                        <td>{{ 'Rp. ' . number_format($expense->amount, 0, ',', '.') }}</td>
-                                        <td>{{ $expense->description ? $expense->description : '-' }}</td>
+                                        <td>{{ $payType->name }}</td>
+                                        <td>{{ $payType->expenseCategory->name }}</td>
+                                        <td>{{ $payType->description ? $payType->description : '-' }}</td>
                                         <td>
 
-                                            <a href="{{ route('Expenses.edit', $expense->id) }}"
+                                            <a href="{{ route('PaymentType.edit', $payType->id) }}"
                                                 class="btn btn-sm btn-secondary">
                                                 <i class="fa-solid fa-pencil"></i>
                                             </a>
 
-                                            <button class="btn btn-sm btn-secondary deleteExpenses" id="deleteExpenses"
-                                                data-id="{{ $expense->id }}">
+                                            <button class="btn btn-sm btn-secondary deletePayType" id="deletePayType"
+                                                data-id="{{ $payType->id }}">
                                                 <i class="fa-solid fa-trash"></i>
                                             </button>
                                         </td>
@@ -73,7 +69,7 @@
 
     {{-- Push Script --}}
     @push('post_scripts')
-        <script src="{{ asset('js/backend/Expenses/Expenses.js') }}"></script>
+        <script src="{{ asset('js/backend/PaymentType/PaymentType.js') }}"></script>
     @endpush
     {{-- End Push Script --}}
 @endsection

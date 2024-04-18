@@ -15,4 +15,9 @@ class ExpenseCategory extends Model
     {
         return $this->hasMany(Expenses::class, 'category_id');
     }
+
+    public function paymentTypes()
+    {
+        return $this->hasMany(PaymentType::class);
+    }
 }

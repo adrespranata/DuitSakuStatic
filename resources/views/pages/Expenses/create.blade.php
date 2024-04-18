@@ -18,7 +18,7 @@
 
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-lg-4">
+                            <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="category_id">Category</label>
                                     <select name="category_id" id="category_id" class="form-control">
@@ -32,7 +32,21 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-6">
+                                <div class="form-group" id="payment_type_dropdown">
+                                    <label for="payment_type_id">Payment Type</label>
+                                    <select name="payment_type_id" id="payment_type_id" class="form-control" disabled>
+                                        <option value="">Select Payment Type</option>
+                                        <!-- Options will be dynamically populated based on the selected category -->
+                                    </select>
+                                    @error('payment_type_id')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="date">Date</label>
                                     <input type="date" name="date" id="date"
@@ -43,7 +57,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="amount">Amount</label>
                                     <input type="text" name="amount" id="amount"
@@ -80,4 +94,14 @@
 
     </div>
     <!-- End of Main Content -->
+
+    {{-- Push Script --}}
+    @push('post_scripts')
+        <script>
+            var getPaymentTypesUrl = "{{ route('getPaymentTypes', ':id') }}";
+        </script>
+
+        <script src="{{ asset('js/backend/PaymentType/PayTypes.js') }}"></script>
+    @endpush
+    {{-- End Push Script --}}
 @endsection

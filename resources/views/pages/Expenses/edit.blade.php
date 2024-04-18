@@ -19,7 +19,7 @@
 
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-lg-4">
+                            <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="category_id">Category</label>
                                     <select name="category_id" id="category_id" class="form-control">
@@ -35,7 +35,26 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="payment_type_id">Payment Type</label>
+                                    <select name="payment_type_id" id="payment_type_id" class="form-control">
+                                        @foreach ($paymentType as $payType)
+                                            <option value="{{ $payType->id }}"
+                                                {{ $payType->id == $expenses->payment_type_id ? 'selected' : '' }}>
+                                                {{ $payType->name }}</option>
+                                        @endforeach
+                                    </select>
+
+                                    @error('payment_type_id')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="date">Date</label>
                                     <input type="date" name="date" id="date"
@@ -46,7 +65,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="amount">Amount</label>
                                     <input type="text" name="amount" id="amount"

@@ -5,9 +5,9 @@ $(document).ready(function () {
 
         // Reset payment type dropdown
         paymentTypeDropdown.empty();
-
+        console.log(category_id);
         // Check if selected category is "Bayar/Top Up" with ID 11
-        if (category_id === "11") {
+        if (category_id === "11" || category_id === "7") {
             // Enable payment type dropdown
             paymentTypeDropdown.prop('disabled', false);
 

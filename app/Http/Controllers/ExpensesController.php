@@ -42,6 +42,7 @@ class ExpensesController extends Controller
      */
     public function store(Request $request)
     {
+        $request->merge(['amount' => str_replace('.', '', $request->amount)]);
         $request->validate([
             'category_id' => 'required|exists:expense_categories,id',
             // 'payment_type_id ' => 'required|exists:payment_types,id',

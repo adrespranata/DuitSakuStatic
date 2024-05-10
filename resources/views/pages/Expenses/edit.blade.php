@@ -102,5 +102,14 @@
         </div>
         <!-- /.container-fluid -->
 
+        {{-- Push Script --}}
+        @push('post_scripts')
+            <script>
+                var getPaymentTypesUrl = "{{ route('getPaymentTypes', ':id') }}";
+            </script>
+
+            <script src="{{ asset('js/backend/PaymentType/createPayTypes.js') }}"></script>
+        @endpush
+        {{-- End Push Script --}}
     </div>
 @endsection
